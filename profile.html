@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>LearnQuest</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="challenges.html" class="nav-link"><i class="fas fa-trophy"></i> Challenges</a></li>
+                <li><a href="shop.html" class="nav-link"><i class="fas fa-store"></i> Shop</a></li>
+                <li><a href="inventory.html" class="nav-link"><i class="fas fa-box"></i> Inventory</a></li>
+                <li><a href="resources.html" class="nav-link"><i class="fas fa-book"></i> Resources</a></li>
+            </ul>
+            <div class="nav-profile">
+                <div class="coin-display">
+                    <i class="fas fa-coins"></i>
+                    <span id="coin-amount">1000</span>
+                </div>
+                <div class="profile-avatar">
+                    <img src="assets/default-avatar.png" alt="User Avatar">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-content">
+        <div class="profile-header">
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <img src="assets/default-avatar.png" alt="User Avatar">
+                </div>
+                <h1>Username</h1>
+            </div>
+            <div class="profile-rank">
+                <img src="assets/ranks/master.png" alt="Rank Icon">
+                <span>Master Learner</span>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span>1250</span>
+                    <label>XP Points</label>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>42</span>
+                    <label>Achievements</label>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-fire"></i>
+                    <span>15</span>
+                    <label>Day Streak</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-card">
+            <h2><i class="fas fa-chart-line"></i> Learning Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>Daily Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p class="progress-text">75% of daily goal completed</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Weekly Streak</h3>
+                    <div class="streak-display">
+                        <i class="fas fa-fire"></i>
+                        <span>5 days</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievements-card">
+            <h2><i class="fas fa-trophy"></i> Recent Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="achievement-name">First Victory</div>
+                    <div class="achievement-progress">Completed</div>
+                </div>
+                <!-- More achievements -->
+            </div>
+        </div>
+
+        <div class="subjects-card">
+            <h2><i class="fas fa-book"></i> Subject Progress</h2>
+            <div class="subjects-grid">
+                <div class="subject-item">
+                    <div class="subject-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="subject-name">Mathematics</div>
+                    <div class="subject-stats">Level 5</div>
+                </div>
+                <!-- More subjects -->
+            </div>
+        </div>
+
+        <div class="history-card">
+            <h2><i class="fas fa-history"></i> Recent Activity</h2>
+            <div class="history-timeline">
+                <div class="history-item">
+                    <div class="history-date">Today</div>
+                    <div class="history-content">Completed Advanced Math Challenge</div>
+                </div>
+                <!-- More history items -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+</body>
+</html> 
