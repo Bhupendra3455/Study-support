@@ -5,28 +5,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedAvatarInput = document.getElementById("selected-avatar");
 
     let selectedAvatar = {
-        id: 'avatar1.jpg', 
+        id: 'avatar1.jpg', // Default to first avatar
         path: document.querySelector('.avatar-option.selected img').src
     };
 
-  
+    // Handle avatar selection
     avatarOptions.forEach(option => {
         option.addEventListener("click", function() {
-       
+            // Remove selected class from all options
             avatarOptions.forEach(opt => opt.classList.remove("selected"));
-        
+            // Add selected class to clicked option
             this.classList.add("selected");
-         
+            // Update selected avatar
             selectedAvatar = {
                 id: this.dataset.avatar,
                 path: this.querySelector('img').src
             };
-       
+            // Update hidden input
             selectedAvatarInput.value = selectedAvatar.id;
         });
     });
 
-  
+    // Set initial selected avatar
     selectedAvatarInput.value = selectedAvatar.id;
 
     registerForm.addEventListener("submit", function (e) {
@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-    
+        // Check if avatar is selected
         if (!selectedAvatar) {
             errorMessage.textContent = "Please select an avatar!";
             errorMessage.style.display = "block";
             return;
         }
 
-      
+        // Get selected subjects
         const subjects = getSubjectsForClass(parseInt(educationLevel));
 
         if (subjects.length === 0) {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formData = new FormData(registerForm);
         
-     
+        // Add user data to localStorage
         const userData = {
             username,
             email,
@@ -73,26 +73,27 @@ document.addEventListener("DOMContentLoaded", function () {
             avatarPath: selectedAvatar,
             level: 1,
             experience: 0,
-            coins: 1000, 
+            coins: 1000, // Starting coins
             subjects,
             studyGoals: formData.get("study-goals"),
             achievements: [],
             tasks: [],
             rank: "Novice",
-            unlockedAnswers: [], 
+            unlockedAnswers: [], // Track which special challenge answers have been unlocked
             inventory: [],
             createdAt: new Date().toISOString()
         };
 
         try {
-
+            // Save user data
             localStorage.setItem("userData", JSON.stringify(userData));
             
-           
+            // Set initial avatar (will be overridden if shop avatar is equipped)
             localStorage.setItem("currentAvatar", selectedAvatar);
             localStorage.setItem("currentAvatarPath", selectedAvatar);
-            localStorage.setItem("defaultAvatarPath", selectedAvatar); 
+            localStorage.setItem("defaultAvatarPath", selectedAvatar); // Save default avatar separately
 
+            // Redirect to dashboard
             window.location.href = "index.html";
         } catch (error) {
             errorMessage.textContent = "Error saving user data. Please try again.";

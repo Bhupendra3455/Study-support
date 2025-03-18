@@ -1,9 +1,9 @@
-
+// Settings Page Functionality
 document.addEventListener('DOMContentLoaded', function() {
-
+    // Load user settings
     loadUserSettings();
     
-    
+    // Add event listeners for settings changes
     setupSettingsListeners();
 });
 
@@ -12,27 +12,27 @@ function loadUserSettings() {
     const settings = JSON.parse(localStorage.getItem('userSettings')) || getDefaultSettings();
 
     if (userData) {
-       
+        // Update profile information
         document.getElementById('username-display').textContent = userData.username;
         document.getElementById('username').value = userData.username;
         document.getElementById('email').value = userData.email || '';
         
-     
+        // Update level and experience
         document.getElementById('level-number').textContent = userData.level || 1;
         document.getElementById('experience').textContent = userData.experience || 0;
         document.getElementById('next-level').textContent = (userData.level || 1) * 100;
         
-     
+        // Update coins
         document.getElementById('coins').textContent = userData.coins || 0;
         
-  
+        // Update experience bar
         updateExperienceBar(userData.experience || 0, userData.level || 1);
         
-   
+        // Update rank display
         updateRankDisplay(userData.level || 1, userData.experience || 0);
     }
 
-
+    // Load saved settings
     document.getElementById('challenge-notifications').checked = settings.notifications.challenges;
     document.getElementById('level-up-notifications').checked = settings.notifications.levelUp;
     document.getElementById('daily-goals-notifications').checked = settings.notifications.dailyGoals;
@@ -67,7 +67,7 @@ function getDefaultSettings() {
 }
 
 function setupSettingsListeners() {
-  
+    // Add listeners for all settings changes
     const settingsInputs = document.querySelectorAll('.settings-group input');
     settingsInputs.forEach(input => {
         input.addEventListener('change', () => {
@@ -99,6 +99,7 @@ function saveSettings() {
     showSuccessMessage('Settings saved successfully!');
 }
 
+// Account Settings Functions
 function updateUsername() {
     const newUsername = document.getElementById('username').value.trim();
     if (!newUsername) {
@@ -139,7 +140,7 @@ function updatePassword() {
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (userData) {
-        userData.password = newPassword; 
+        userData.password = newPassword; // In a real app, this should be hashed
         localStorage.setItem('userData', JSON.stringify(userData));
         document.getElementById('password').value = '';
         showSuccessMessage('Password updated successfully!');
@@ -169,7 +170,7 @@ function saveStudyPreferences() {
     saveSettings();
 }
 
-
+// Data Management Functions
 function exportData() {
     const userData = JSON.parse(localStorage.getItem('userData'));
     const settings = JSON.parse(localStorage.getItem('userSettings'));
@@ -201,6 +202,7 @@ function clearData() {
     );
 }
 
+// Utility Functions
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }

@@ -1,11 +1,11 @@
-
+/* Resources Page Styles */
 .resources-content {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-
+/* Upload Section */
 .upload-section {
     background: var(--card-background);
     border-radius: 15px;
@@ -78,7 +78,7 @@
     cursor: pointer;
 }
 
-
+/* Resources List */
 .resources-list {
     background: var(--card-background);
     border-radius: 15px;
@@ -183,6 +183,7 @@
     transform: scale(1.1);
 }
 
+/* File Type Icons */
 .file-icon {
     width: 40px;
     height: 40px;
@@ -213,6 +214,7 @@
     color: white;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .resources-header {
         flex-direction: column;
@@ -232,7 +234,7 @@
     }
 }
 
-
+/* Drag and Drop Styles */
 .upload-area.dragover {
     background: var(--primary-color);
     color: var(--background-dark);
@@ -242,7 +244,7 @@
     color: var(--background-dark);
 }
 
-
+/* Loading Animation */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }

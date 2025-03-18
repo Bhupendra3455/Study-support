@@ -1,17 +1,17 @@
 :root {
-    --PCO: #00ff88;
-   
-    --ACO: #ffd700;
-    --BGD: #0a0a1f;
-    --CBG: rgba(26, 26, 46, 0.8);
-    --TCO: #ffffff;
-    --TMU: #a0aec0;
-   
-    
-    --DCO: #f56565;
-    --SCO: rgba(0, 255, 136, 0.2);
-    
-   
+    --primary-color: #00ff88;
+    --secondary-color: #ff3e3e;
+    --accent-color: #ffd700;
+    --background-dark: #0a0a1f;
+    --card-bg: rgba(26, 26, 46, 0.8);
+    --text-color: #ffffff;
+    --text-muted: #a0aec0;
+    --success-color: #48bb78;
+    --warning-color: #f6ad55;
+    --danger-color: #f56565;
+    --shadow-color: rgba(0, 255, 136, 0.2);
+    --gradient-1: linear-gradient(45deg, #00ff88, #00b8ff);
+    --gradient-2: linear-gradient(45deg, #ff3e3e, #ff8f00);
 }
 
 * {
@@ -26,7 +26,7 @@
 }
 
 .nav-link {
-    color: var(--TCO);
+    color: var(--text-color);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -38,12 +38,12 @@
 
 .nav-link:hover {
     background: rgba(0, 255, 136, 0.1);
-    color: var(--PCO);
+    color: var(--primary-color);
 }
 
 .nav-link.active {
-    background: var(--PCO);
-    color: var(--BGD);
+    background: var(--primary-color);
+    color: var(--background-dark);
 }
 
 .nav-content {
@@ -66,8 +66,8 @@
 }
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--BGD);
-    color: var(--TCO);
+    background: var(--background-dark);
+    color: var(--text-color);
     min-height: 100vh;
 }
 
@@ -95,7 +95,7 @@ body {
     align-items: center;
     gap: 10px;
     font-size: 1.5rem;
-    color: var(--PCO);
+    color: var(--primary-color);
     font-family: 'Orbitron', sans-serif;
 }
 
@@ -110,7 +110,7 @@ body {
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--PCO);
+    border: 2px solid var(--primary-color);
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
 }
 
@@ -127,7 +127,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--ACO);
+    color: var(--accent-color);
 }
 
 .main-container {
@@ -143,10 +143,10 @@ body {
 
 .shop-header h1 {
     font-size: 3rem;
-    color: var(--PCO);
+    color: var(--primary-color);
     font-family: 'Orbitron', sans-serif;
     margin-bottom: 10px;
-    text-shadow: 0 0 20px var(--SCO);
+    text-shadow: 0 0 20px var(--shadow-color);
 }
 
 .shop-categories {
@@ -158,11 +158,11 @@ body {
 }
 
 .category-btn {
-    background: var(--CBG);
+    background: var(--card-bg);
     border: none;
     padding: 12px 24px;
     border-radius: 30px;
-    color: var(--TCO);
+    color: var(--text-color);
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -173,8 +173,8 @@ body {
 }
 
 .category-btn:hover, .category-btn.active {
-    background: var(--PCO);
-    color: var(--BGD);
+    background: var(--primary-color);
+    color: var(--background-dark);
     transform: translateY(-2px);
 }
 
@@ -186,7 +186,7 @@ body {
 }
 
 .shop-item {
-    background: var(--CBG);
+    background: var(--card-bg);
     border-radius: 20px;
     padding: 20px;
     text-align: center;
@@ -213,7 +213,7 @@ body {
 
 .shop-item:hover {
     transform: translateY(-5px);
-    border-color: var(--PCO);
+    border-color: var(--primary-color);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -227,7 +227,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 2.5rem;
-    color: var(--PCO);
+    color: var(--primary-color);
     transition: all 0.3s ease;
 }
 
@@ -237,7 +237,7 @@ body {
     margin: 10px auto;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--ACO);
+    border: 3px solid var(--accent-color);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -258,24 +258,24 @@ body {
 
 .shop-item:hover .item-image {
     transform: scale(1.1);
-    box-shadow: 0 0 30px var(--SCO);
+    box-shadow: 0 0 30px var(--shadow-color);
 }
 
 .item-name {
     font-size: 1.5rem;
     margin: 10px 0;
-    color: var(--PCO);
+    color: var(--primary-color);
 }
 
 .item-description {
-    color: var(--TMU);
+    color: var(--text-muted);
     margin-bottom: 20px;
     font-size: 0.9rem;
 }
 
 .item-price {
     font-size: 1.3rem;
-    color: var(--ACO);
+    color: var(--accent-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,7 +284,7 @@ body {
 }
 
 .buy-btn {
-    background: var(--PCO);
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -301,14 +301,14 @@ body {
 }
 
 .buy-btn.purchased {
-    background: var(--TMU);
+    background: var(--text-muted);
     cursor: not-allowed;
     opacity: 0.7;
 }
 
 .buy-btn.purchased:hover {
     transform: none;
-    background: var(--TMU);
+    background: var(--text-muted);
 }
 
 .rarity-badge {
@@ -342,13 +342,13 @@ body {
 }
 
 .modal-content {
-    background: var(--CBG);
+    background: var(--card-bg);
     padding: 30px;
     border-radius: 20px;
     max-width: 400px;
     width: 90%;
     text-align: center;
-    border: 1px solid var(--PCO);
+    border: 1px solid var(--primary-color);
 }
 
 .modal-buttons {
@@ -368,13 +368,13 @@ body {
 }
 
 .confirm-btn {
-    background: var(--PCO);
-    color: var(--BGD);
+    background: var(--primary-color);
+    color: var(--background-dark);
 }
 
 .cancel-btn {
-    background: var(--DCO);
-    color: var(--TCO);
+    background: var(--danger-color);
+    color: var(--text-color);
 }
 
 .avatar-subcategory {
@@ -382,7 +382,7 @@ body {
 }
 
 .subcategory-title {
-    color: var(--PCO);
+    color: var(--primary-color);
     font-size: 1.5rem;
     margin-bottom: 20px;
     padding-bottom: 10px;
@@ -426,7 +426,7 @@ body {
     margin: 0 auto 15px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--PCO);
+    border: 3px solid var(--primary-color);
     box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
     position: relative;
 }
@@ -444,12 +444,12 @@ body {
 
 /* Power-up Card Specific Styles */
 .powerup-card {
-    background: linear-gradient(135deg, var(--CBG) 0%, rgba(0, 255, 136, 0.1) 100%);
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 255, 136, 0.1) 100%);
 }
 
 .powerup-icon {
     font-size: 3em;
-    color: var(--PCO);
+    color: var(--primary-color);
     margin-bottom: 15px;
     text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
@@ -470,13 +470,13 @@ body {
 /* Common Card Elements */
 .item-name {
     font-size: 1.2em;
-    color: var(--PCO);
+    color: var(--primary-color);
     margin: 10px 0;
     font-weight: bold;
 }
 
 .item-description {
-    color: var(--TCO);
+    color: var(--text-color);
     margin-bottom: 15px;
     font-size: 0.9em;
     line-height: 1.4;
@@ -536,8 +536,8 @@ body {
 
 /* Buy Button */
 .buy-btn {
-    background: var(--PCO);
-    color: var(--BGD);
+    background: var(--primary-color);
+    color: var(--background-dark);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -551,7 +551,7 @@ body {
 
 .buy-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px var(--SCO);
+    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 /* Stats Display */
@@ -570,20 +570,20 @@ body {
 
 .stat-label {
     font-size: 0.8em;
-    color: var(--TCO);
+    color: var(--text-color);
 }
 
 .stat-value {
     font-size: 1.2em;
-    color: var(--PCO);
+    color: var(--primary-color);
     font-weight: bold;
 }
 
 /* Animation Effects */
 @keyframes glowing {
-    0% { box-shadow: 0 0 5px var(--PCO); }
-    50% { box-shadow: 0 0 20px var(--PCO); }
-    100% { box-shadow: 0 0 5px var(--PCO); }
+    0% { box-shadow: 0 0 5px var(--primary-color); }
+    50% { box-shadow: 0 0 20px var(--primary-color); }
+    100% { box-shadow: 0 0 5px var(--primary-color); }
 }
 
 .legendary-item {
@@ -603,9 +603,9 @@ body {
 }
 
 .category-btn {
-    background: var(--CBG);
-    color: var(--TCO);
-    border: 1px solid var(--PCO);
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
     padding: 10px 20px;
     border-radius: 20px;
     cursor: pointer;
@@ -614,8 +614,8 @@ body {
 }
 
 .category-btn.active {
-    background: var(--PCO);
-    color: var(--BGD);
+    background: var(--primary-color);
+    color: var(--background-dark);
 }
 
 .category-btn:hover {
