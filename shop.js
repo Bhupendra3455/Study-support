@@ -1,4 +1,4 @@
-
+// Shop Items Data
 const shopItems = {
     pets: [
         {
@@ -310,7 +310,7 @@ const shopItems = {
     }
 };
 
-
+// Shop functionality
 class Shop {
     constructor() {
         console.log('Initializing shop...');
@@ -318,7 +318,7 @@ class Shop {
         this.currentCategory = 'pets';
         this.coins = 1000;
         
-        
+        // Initialize the shop
         this.initializeEventListeners();
         this.loadUserData();
         this.loadCurrentAvatar();
@@ -327,7 +327,8 @@ class Shop {
 
     initializeEventListeners() {
         console.log('Setting up event listeners...');
-    
+        
+        // Category buttons
         document.querySelectorAll('.category-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const category = button.dataset.category;
@@ -336,7 +337,7 @@ class Shop {
             });
         });
 
-        
+        // Purchase buttons using event delegation
         document.getElementById('shop-items').addEventListener('click', (e) => {
             const buyButton = e.target.closest('.buy-btn');
             if (buyButton) {
@@ -346,7 +347,7 @@ class Shop {
             }
         });
 
-       
+        // Modal buttons
         document.getElementById('confirm-purchase').addEventListener('click', () => {
             console.log('Confirming purchase...');
             this.completePurchase();
@@ -357,7 +358,7 @@ class Shop {
             this.closeModal();
         });
 
-      
+        // Listen for coin updates from challenges
         window.addEventListener('coinsUpdated', (event) => {
             this.updateCoins(event.detail.coins);
         });
@@ -375,10 +376,12 @@ class Shop {
         this.coins = newAmount;
         this.updateCoinDisplay();
         
+        // Update userData in localStorage
         const userData = JSON.parse(localStorage.getItem('userData') || '{}');
         userData.coins = this.coins;
         localStorage.setItem('userData', JSON.stringify(userData));
-    
+        
+        // Update userCoins for inventory
         localStorage.setItem('userCoins', this.coins.toString());
     }
 
@@ -414,7 +417,7 @@ class Shop {
         let items = [];
 
         if (category === 'avatars') {
-   
+            // Flatten all avatar subcategories into a single array
             Object.values(this.shopItems.avatars).forEach(subcategory => {
                 items = items.concat(subcategory);
             });
@@ -618,18 +621,19 @@ class Shop {
         }
 
         if (this.coins >= this.currentItem.price) {
-           
+            // Deduct coins
             this.coins -= this.currentItem.price;
             this.updateCoinDisplay();
-        
+            
+            // Save to localStorage
             const userData = JSON.parse(localStorage.getItem('userData') || '{}');
             userData.coins = this.coins;
             localStorage.setItem('userData', JSON.stringify(userData));
             
-       
+            // Add to inventory
             this.addToInventory(this.currentItem);
             
-         
+            // Play success sound
             const purchaseSound = document.getElementById('purchase-sound');
             if (purchaseSound) {
                 purchaseSound.play().catch(err => console.log('Could not play sound:', err));
@@ -650,13 +654,13 @@ class Shop {
     }
 
     findItem(itemId) {
-     
+        // First check regular categories
         for (const category in this.shopItems) {
             if (Array.isArray(this.shopItems[category])) {
                 const item = this.shopItems[category].find(item => item.id === itemId);
                 if (item) return item;
             } else if (typeof this.shopItems[category] === 'object') {
-                
+                // Check nested categories (like avatars)
                 for (const subcategory in this.shopItems[category]) {
                     const items = this.shopItems[category][subcategory];
                     if (Array.isArray(items)) {
@@ -673,7 +677,7 @@ class Shop {
         console.log('Adding item to inventory:', item);
         const inventory = JSON.parse(localStorage.getItem('inventory') || '[]');
         
-     
+        // Add purchase timestamp and ensure category is set
         const purchasedItem = {
             ...item,
             purchasedAt: new Date().toISOString()
@@ -682,13 +686,14 @@ class Shop {
         inventory.push(purchasedItem);
         localStorage.setItem('inventory', JSON.stringify(inventory));
         
-      
+        // If it's an avatar, equip it automatically
         if (item.category === 'avatars') {
             console.log('Equipping new avatar:', item.imagePath);
             localStorage.setItem('currentAvatar', item.id);
             localStorage.setItem('currentAvatarPath', item.imagePath);
             this.updateProfileAvatar(item.imagePath);
             
+            // Dispatch avatar equipped event
             const event = new CustomEvent('avatarEquipped', { 
                 detail: { avatar: item }
             });
@@ -697,7 +702,7 @@ class Shop {
     }
 
     loadCurrentAvatar() {
-  
+        // Try to load the current avatar from localStorage
         const currentAvatarPath = localStorage.getItem('currentAvatarPath');
         const defaultAvatarPath = 'theme/avatars/default.png';
         
@@ -713,12 +718,12 @@ class Shop {
     updateProfileAvatar(imagePath) {
         console.log('Updating profile avatar to:', imagePath);
         
-       
+        // Update all profile avatar images on the page
         const profileAvatars = document.querySelectorAll('.profile-avatar img, #profile-avatar');
         profileAvatars.forEach(avatar => {
             if (avatar) {
                 avatar.src = imagePath;
-               
+                // Add error handling
                 avatar.onerror = () => {
                     console.log('Failed to load avatar image, using default');
                     avatar.src = 'theme/avatars/default.png';
@@ -726,10 +731,10 @@ class Shop {
             }
         });
 
-     
+        // Store the current avatar path
         localStorage.setItem('currentAvatarPath', imagePath);
 
-       
+        // Dispatch an event to notify other components
         const event = new CustomEvent('profileAvatarChanged', { 
             detail: { imagePath: imagePath }
         });
@@ -743,7 +748,41 @@ class Shop {
         notification.textContent = message;
         document.body.appendChild(notification);
 
-      
+        // Add styles if not already present
+        if (!document.querySelector('#notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'notification-styles';
+            style.textContent = `
+                .notification {
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 1000;
+                    animation: slideIn 0.5s ease-out;
+                }
+                .notification.success {
+                    background: var(--success-color, #48bb78);
+                }
+                .notification.error {
+                    background: var(--danger-color, #f56565);
+                }
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
 
         setTimeout(() => {
             notification.remove();
@@ -751,7 +790,7 @@ class Shop {
     }
 
     onItemPurchased(item) {
-     
+        // Handle specific item effects
         switch(item.category) {
             case 'powerups':
                 this.activatePowerup(item);
@@ -778,13 +817,37 @@ class Shop {
         });
         localStorage.setItem('activePowerups', JSON.stringify(activePowerups));
         
-    
+        // Dispatch event for other components
         window.dispatchEvent(new CustomEvent('powerupActivated', { detail: powerup }));
     }
 
-   
+    getPowerupDuration(powerup) {
+        // Duration in minutes
+        switch(powerup.id) {
+            case 'timeBooster':
+                return 30;
+            case 'focusShield':
+                return 60;
+            case 'brainBoost':
+                return 20;
+            case 'streakProtector':
+                return 1440; // 24 hours
+            case 'doubleCoins':
+                return 15;
+            default:
+                return 0;
+        }
+    }
 
+    equipCompanion(companion) {
+        localStorage.setItem('activeCompanion', JSON.stringify(companion));
+        window.dispatchEvent(new CustomEvent('companionEquipped', { detail: companion }));
+    }
 
+    applyTheme(theme) {
+        localStorage.setItem('currentTheme', theme.id);
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: theme }));
+    }
 
     equipAvatar(avatar) {
         localStorage.setItem('currentAvatar', avatar.id);
@@ -792,6 +855,7 @@ class Shop {
     }
 }
 
+// Initialize shop when page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Page loaded, initializing shop...');
     window.shop = new Shop();
