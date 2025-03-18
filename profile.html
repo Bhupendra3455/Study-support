@@ -3,129 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Learning Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Profile - Study Focus</title>
+    <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-logo">
-                <i class="fas fa-graduation-cap"></i>
-                <span>LearnQuest</span>
+        <ul>
+            <div class="topbarout">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="challenges.html"><i class="fas fa-trophy"></i> Challenges</a></li>
+                <li><a href="shop.html"><i class="fas fa-store"></i> Shop</a></li>
+                <li><a href="inventory.html"><i class="fas fa-backpack"></i> Inventory</a></li>
+                <li><a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="challenges.html" class="nav-link"><i class="fas fa-trophy"></i> Challenges</a></li>
-                <li><a href="shop.html" class="nav-link"><i class="fas fa-store"></i> Shop</a></li>
-                <li><a href="inventory.html" class="nav-link"><i class="fas fa-box"></i> Inventory</a></li>
-                <li><a href="resources.html" class="nav-link"><i class="fas fa-book"></i> Resources</a></li>
-            </ul>
-            <div class="nav-profile">
-                <div class="coin-display">
-                    <i class="fas fa-coins"></i>
-                    <span id="coin-amount">1000</span>
-                </div>
-                <div class="profile-avatar">
-                    <img src="assets/default-avatar.png" alt="User Avatar">
-                </div>
+            <div class="topbarout">
+                <li>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </li>
+                <li><button id="logout"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
             </div>
-        </div>
+        </ul>
     </nav>
 
-    <div class="profile-content">
-        <div class="profile-header">
-            <div class="profile-info">
-                <div class="profile-avatar">
-                    <img src="assets/default-avatar.png" alt="User Avatar">
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="avatar-container">
+                    <img id="user-avatar" src="theme/avatars/default.png" alt="User Avatar">
+                    <div class="level-badge" id="level-number">1</div>
                 </div>
-                <h1>Username</h1>
-            </div>
-            <div class="profile-rank">
-                <img src="assets/ranks/master.png" alt="Rank Icon">
-                <span>Master Learner</span>
-            </div>
-            <div class="profile-stats">
-                <div class="stat-item">
-                    <i class="fas fa-star"></i>
-                    <span>1250</span>
-                    <label>XP Points</label>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-trophy"></i>
-                    <span>42</span>
-                    <label>Achievements</label>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-fire"></i>
-                    <span>15</span>
-                    <label>Day Streak</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="stats-card">
-            <h2><i class="fas fa-chart-line"></i> Learning Stats</h2>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <h3>Daily Progress</h3>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 75%"></div>
+                <h2 id="username-display">Username</h2>
+                <div class="stats-container">
+                    <div class="coins-display">
+                        <i class="fas fa-coins"></i>
+                        <span id="coins">0</span>
                     </div>
-                    <p class="progress-text">75% of daily goal completed</p>
-                </div>
-                <div class="stat-box">
-                    <h3>Weekly Streak</h3>
-                    <div class="streak-display">
-                        <i class="fas fa-fire"></i>
-                        <span>5 days</span>
+                    <div class="experience-container">
+                        <div class="experience-bar">
+                            <div class="experience-fill" id="experience-fill"></div>
+                        </div>
+                        <div class="experience-text">
+                            <span id="experience">0</span> / <span id="next-level">100</span> XP
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="achievements-card">
-            <h2><i class="fas fa-trophy"></i> Recent Achievements</h2>
-            <div class="achievements-grid">
-                <div class="achievement-item">
-                    <div class="achievement-icon">
-                        <i class="fas fa-star"></i>
+        <!-- Main Content -->
+        <div class="content-area">
+            <div class="profile-content">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <div class="profile-info">
+                        <h1 id="profile-username">Username</h1>
+                        <div class="profile-rank">
+                            <img id="rank-image" src="theme/ranks/novice.png" alt="Rank">
+                            <span id="rank-name">Novice</span>
+                        </div>
                     </div>
-                    <div class="achievement-name">First Victory</div>
-                    <div class="achievement-progress">Completed</div>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-fire"></i>
+                            <span id="streak-count">0</span>
+                            <label>Day Streak</label>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="total-study-time">0h</span>
+                            <label>Study Time</label>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-tasks"></i>
+                            <span id="completed-tasks">0</span>
+                            <label>Tasks Done</label>
+                        </div>
+                    </div>
                 </div>
-                <!-- More achievements -->
+
+                <!-- Study Statistics -->
+                <div class="stats-card">
+                    <h2><i class="fas fa-chart-bar"></i> Study Statistics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3>Weekly Progress</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="weekly-progress"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Monthly Progress</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="monthly-progress"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Study Streak</h3>
+                            <div class="streak-display">
+                                <i class="fas fa-fire"></i>
+                                <span id="current-streak">0</span>
+                                <span>days</span>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Best Streak</h3>
+                            <div class="streak-display">
+                                <i class="fas fa-trophy"></i>
+                                <span id="best-streak">0</span>
+                                <span>days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="achievements-card">
+                    <h2><i class="fas fa-medal"></i> Achievements</h2>
+                    <div class="achievements-grid" id="achievements-grid">
+                        <!-- Achievements will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Study History -->
+                <div class="history-card">
+                    <h2><i class="fas fa-history"></i> Study History</h2>
+                    <div class="history-timeline" id="study-history">
+                        <!-- Study history will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Favorite Subjects -->
+                <div class="subjects-card">
+                    <h2><i class="fas fa-book"></i> Favorite Subjects</h2>
+                    <div class="subjects-grid" id="favorite-subjects">
+                        <!-- Favorite subjects will be dynamically added here -->
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="subjects-card">
-            <h2><i class="fas fa-book"></i> Subject Progress</h2>
-            <div class="subjects-grid">
-                <div class="subject-item">
-                    <div class="subject-icon">
-                        <i class="fas fa-calculator"></i>
+        <!-- Right Sidebar -->
+        <div class="sidebar">
+            <div class="rank-section">
+                <h3>Your Rank</h3>
+                <div class="rank-display">
+                    <div class="rank-image-container">
+                        <img id="rank-image" src="theme/ranks/novice.png" alt="Rank">
                     </div>
-                    <div class="subject-name">Mathematics</div>
-                    <div class="subject-stats">Level 5</div>
+                    <div class="rank-name" id="rank-name">Novice</div>
+                    <div class="rank-progress">
+                        <div class="progress-bar">
+                            <div id="rank-progress-fill"></div>
+                        </div>
+                        <p id="rank-progress-text">0%</p>
+                    </div>
                 </div>
-                <!-- More subjects -->
-            </div>
-        </div>
-
-        <div class="history-card">
-            <h2><i class="fas fa-history"></i> Recent Activity</h2>
-            <div class="history-timeline">
-                <div class="history-item">
-                    <div class="history-date">Today</div>
-                    <div class="history-content">Completed Advanced Math Challenge</div>
-                </div>
-                <!-- More history items -->
             </div>
         </div>
     </div>
 
-    <script src="js/profile.js"></script>
+    <script src="script.js"></script>
+    <script src="profile.js"></script>
 </body>
 </html> 

@@ -4,7 +4,7 @@ class Inventory {
         this.currentCategory = 'all';
         this.inventory = [];
         
-       
+        // Initialize default avatars
         this.initializeDefaultAvatars();
         
         this.initializeEventListeners();
@@ -15,7 +15,7 @@ class Inventory {
     initializeEventListeners() {
         console.log('Setting up event listeners...');
         
-     
+        // Category buttons
         document.querySelectorAll('.category-btn').forEach(button => {
             button.addEventListener('click', () => {
                 console.log('Category clicked:', button.dataset.category);
@@ -26,18 +26,19 @@ class Inventory {
 
     loadUserData() {
         console.log('Loading user data...');
-      
+        // Load inventory
         this.inventory = JSON.parse(localStorage.getItem('inventory') || '[]');
         
-        
+        // Load coins
         const userData = JSON.parse(localStorage.getItem('userData') || '{}');
         this.coins = userData.coins || 0;
         this.updateCoinDisplay();
         
-     
+        // Load level
         this.level = userData.level || 1;
         this.updateLevelDisplay();
 
+        // Load current avatar
         this.currentAvatar = localStorage.getItem('currentAvatar');
         this.updateProfileAvatar();
         
@@ -107,7 +108,7 @@ class Inventory {
             const itemElement = document.createElement('div');
             itemElement.className = 'inventory-item';
 
-          
+            // Special handling for avatars
             const imageContent = item.category === 'avatars'
                 ? `<div class="avatar-image ${isActive ? 'active' : ''}">
                      <img src="${item.imagePath}" alt="${item.name}" onerror="this.src='default-avatar.png'">
@@ -154,7 +155,7 @@ class Inventory {
     }
 
     canUseItem(item) {
-        return true; 
+        return true; // All items can be used in inventory
     }
 
     getButtonText(item, isActive) {
@@ -219,17 +220,17 @@ class Inventory {
         localStorage.setItem('currentAvatar', avatar.id);
         localStorage.setItem('currentAvatarPath', avatar.imagePath);
         
-      
+        // Update all profile avatars across pages
         this.updateProfileAvatar();
         
-        
+        // Dispatch event for other components
         window.dispatchEvent(new CustomEvent('avatarChanged', { 
             detail: { id: avatar.id, path: avatar.imagePath }
         }));
         
         this.showNotification(`Avatar "${avatar.name}" equipped!`, 'success');
         
-      
+        // Refresh the display to update active states
         this.displayItems(this.currentCategory);
     }
 
@@ -240,7 +241,7 @@ class Inventory {
         notification.textContent = message;
         document.body.appendChild(notification);
 
-    
+        // Add styles if not already present
         if (!document.querySelector('#notification-styles')) {
             const style = document.createElement('style');
             style.id = 'notification-styles';
@@ -304,11 +305,22 @@ class Inventory {
             }
         ];
 
-      
+        // Add default avatars if they don't exist
+        let updated = false;
+        defaultAvatars.forEach(avatar => {
+            if (!inventory.some(item => item.id === avatar.id)) {
+                inventory.push(avatar);
+                updated = true;
+            }
+        });
+
+        if (updated) {
+            localStorage.setItem('inventory', JSON.stringify(inventory));
+        }
     }
 }
 
-
+// Initialize inventory when page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Page loaded, initializing inventory...');
     window.inventory = new Inventory();

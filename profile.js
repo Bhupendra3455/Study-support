@@ -1,13 +1,15 @@
-
+// Profile Page Functionality
 document.addEventListener('DOMContentLoaded', function() {
- 
+    // Load user data
     loadUserData();
     
-  
+    // Load achievements
     loadAchievements();
- 
+    
+    // Load study history
     loadStudyHistory();
     
+    // Load favorite subjects
     loadFavoriteSubjects();
 });
 
@@ -16,7 +18,7 @@ function loadUserData() {
     const studyData = JSON.parse(localStorage.getItem('studyData')) || getDefaultStudyData();
 
     if (userData) {
-    
+        // Update profile information
         document.getElementById('profile-username').textContent = userData.username;
         document.getElementById('username-display').textContent = userData.username;
         document.getElementById('level-number').textContent = userData.level || 1;
@@ -24,21 +26,22 @@ function loadUserData() {
         document.getElementById('next-level').textContent = (userData.level || 1) * 100;
         document.getElementById('coins').textContent = userData.coins || 0;
         
-      
+        // Update experience bar
         updateExperienceBar(userData.experience || 0, userData.level || 1);
         
-    
+        // Update rank display
         updateRankDisplay(userData.level || 1, userData.experience || 0);
         
-     
+        // Update stats
         document.getElementById('streak-count').textContent = studyData.currentStreak || 0;
         document.getElementById('total-study-time').textContent = formatStudyTime(studyData.totalStudyTime || 0);
         document.getElementById('completed-tasks').textContent = studyData.completedTasks || 0;
-      
+        
+        // Update progress bars
         updateProgressBar('weekly-progress', studyData.weeklyProgress || 0);
         updateProgressBar('monthly-progress', studyData.monthlyProgress || 0);
         
-   
+        // Update streaks
         document.getElementById('current-streak').textContent = studyData.currentStreak || 0;
         document.getElementById('best-streak').textContent = studyData.bestStreak || 0;
     }

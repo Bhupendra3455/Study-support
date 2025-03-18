@@ -1,11 +1,11 @@
-
+/* Profile Page Styles */
 .profile-content {
     padding: 20px;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-
+/* Profile Header */
 .profile-header {
     background: var(--card-background);
     border-radius: 15px;
@@ -377,3 +377,4 @@
 .profile-content > div:nth-child(3) { animation-delay: 0.3s; }
 .profile-content > div:nth-child(4) { animation-delay: 0.4s; }
 .profile-content > div:nth-child(5) { animation-delay: 0.5s; }
+</rewritten_file> 
